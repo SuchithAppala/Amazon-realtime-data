@@ -1,0 +1,95 @@
+{% if session['role']=='customers' %}
+{% include 'chead.html' %}
+{% endif %}
+{% if session['role']=='sellers'%}
+{% include 'shead.html' %}
+{% endif %}
+{% if session['role']=='admin'%}
+{% include 'ahead.html' %}
+{% endif %}
+<div class="m-50">
+    {% for order in orders %}
+    {% set customer = get_customer_by_customer_id(order[4]) %}
+    {% set seller = get_seller_by_seller_id(order[3]) %}
+    {% set order_items=get_order_items_by_order_id(order[0]) %}
+    <div class="text-center mt-20 H h1-20 mb-10 h-1">View Orders</div>
+    <div class="card p-20 login">
+        <div class="row p-20">
+            <div class="col-3">
+                <label class="form-label">Order Date</label>
+                <div class="product-color pl-10">{{order[2]}}</div>
+            </div>
+            <div class="col-3">
+                <label class="form-label">Status</label>
+                <div class="product-color pl-10">{{order[1]}}</div>
+            </div>
+            <div class="col-3">
+                <label class="form-label">Customer_id</label>
+                <div class="product-color pl-10">{{customer[1]}}</div>
+            </div>
+            <div class="col-3">
+                <label class="form-label">Seller_id</label>
+                <div class="product-color pl-10">{{seller[1]}}</div>
+            </div>
+        </div>
+        <div class="m-20">
+            <table border="1" class="w-100">
+                <thead>
+                    <tr>
+                        <th>Quantity</th>
+                        <th>Order Id</th>
+                        <th>Product Name</th>
+                        <th>Total Price</th>
+                          {% if session['role']=='customers' %}
+                            {% if order[1]=='Cart' %}
+                                <th>Remove</th>
+                            {% endif %}
+                          {% endif %}
+                    </tr>
+                </thead>
+                <tbody>
+                    {% set total_price=namespace(value=0) %}
+                    {% for order_item in order_items %}
+                    {% set product = get_product_by_inventory_id(order_item[3])%}
+                    {% set total_price.value = total_price.value + ((product[3] | float) * (order_item[1] | float)) | round(2) %}
+                    <tr>
+                        <td>{{order_item[1]}}</td>
+                        <td>{{order_item[2]}}</td>
+                        <td>{{product[2]}}</td>
+                        <td>$ {{ ((product[3] | float) * (order_item[1] | float)) | round(2) }}</td>
+                        {% if session['role']=='customers' %}
+                        {% if order[1]=='Cart' %}
+                        <td><a href="remove_from_cart?order_id={{order[0]}}&order_item_id={{order_item[0]}}">Remove</a>
+                        </td>
+                        {% endif %}
+                        {% endif%}
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            <div class="product text-end p-10 mr-50">${{total_price.value}}</div>
+            {% if session['role']=='customers' %}
+            {% if order[1]=='Cart' %}
+            <div class="text-end mr-100"><a
+                    href="order_now?order_id={{order[0]}}&total_price={{total_price.value}}">Order Now</a></div>
+            {% endif %}
+            {% endif %}
+            {% if session['role']=='customers' %}
+            {% if order[1]=='ordered' %}
+            <div class="text-end mr-100 a-1"><a href="cancel_order?order_id={{order[0]}}">Cancel Order</a></div>
+            {% endif %}
+            {% endif %}
+            {% if session['role']=="sellers" %}
+            {% if order[1]=='ordered' %}
+            <div class="text-end mr-100 a-1"><a href="order_dispatched?order_id={{order[0]}}">dispatch Order</a></div>
+            {% endif %}
+            {% endif %}
+            {% if session['role']=="customers" %}
+            {% if order[1]=='Dispatched' %}
+            <div class="text-end mr-100 a-1"><a href="delivered_now?order_id={{order[0]}}">Mark as Received</a></div>
+            {% endif %}
+            {% endif %}
+        </div>
+    </div>
+    {% endfor %}
+</div>

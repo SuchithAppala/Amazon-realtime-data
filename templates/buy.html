@@ -1,0 +1,34 @@
+{% include 'chead.html' %}
+<div class="m-20">
+    <div class="row">
+        {% for inventory in inventories %}
+        {% set product=get_product_by_product_id(inventory[3])%}
+            <div class="card-2 m-20">
+                <div class="text-center H h1-20">Inventories</div>
+                    <div class="row">
+                    <div class="col-3 mt-20">
+                        <div class="row">
+                            <div class="form-label">quantity </div>
+                            <div class="product-color pl-10"> - {{inventory[1]}}</div>
+                        </div>
+                    </div>
+                    <div class="col-3 mt-20">
+                        <div class="row">
+                            <div class="form-label">Price </div>
+                            <div class="product-color pl-10"> - ${{product[3]}}</div>
+                        </div>
+                    </div>
+                    <div class="col-6 mt-10">
+                        <form action="add_cart">
+                            <div class="row">
+                                <input type="number" class="w-50 p-10" name="quantity"  placeholder="Enter Quantity" required>
+                                <input type="hidden" class="" name="inventory_id" value="{{inventory[0]}}" placeholder="Enter Quantity" required>
+                                <input type="submit" value="Add" class="btn w-50 L ml-5 color-primary p-10 mb-10 mt-10">
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</div>

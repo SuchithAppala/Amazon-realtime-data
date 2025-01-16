@@ -1,0 +1,23 @@
+{% include 'shead.html' %}
+<div class="mt-20">
+    <div class="card login-card mt-20">
+        <form action="add_product_action"  method="post" enctype="multipart/form-data">
+            <div class="text-center  h-1">File Uploading Here</div>
+            <div class="mt-10 form-group">
+                <label for="file" class="form-label">Files</label>
+                <input type="file" name="file" id="file" class="form-control pe-30">
+            </div>
+            <div class="mt-10">
+                 <select name="category_name" id="category_name" class="form-control" required>
+                    <option value="">choose Category</option>
+                    <option value="Beauty">Beauty</option>
+                    <option value="kitchen">Kitchen</option>
+                     <option value="electronics">Electronics</option>
+                </select>
+            </div>
+            <div class="mt-10">
+                <input type="submit" value="Add" class="btn w-100  color-primary p-10 mb-10 mt-10">
+            </div>
+        </form>
+    </div>
+</div>

@@ -1,0 +1,26 @@
+data = [
+        'RIEQD92X6SGGF',
+        'TurboTax Deluxe with State: Easy to use and accurate',
+        'Ive been a user for more than thirty years with no issues with the IRS. Phew! The program keeps track is your previous filing and carries it into your current filing. TurboTax will also download your tax forms from your financial institutions and fill lout the necessary forms. With the state return addition it automatically completes your state tax return. Finally TurboTax runs a review and lots areas that need fixing. Once these areas a fixed it runs an audit probability.  You then have the option to electronically file your returns. Recommend way to file as TurboTax notifies you when the IRS accepts your return. This is a great way to file your taxes.',
+        '5',
+        'https://www.amazon.com/gp/customer-reviews/RIEQD92X6SGGF',
+        'F. Langley',
+        'https://images-na.ssl-images-amazon.com/images/S/amazon-avatars-global/default._CR0,0,1024,1024_SX48_.png',
+        list([]),
+        None,
+        'Reviewed in the United States on December 16, 2024',
+        True,
+        '9 people found this helpful' 'B0DHYGWYJ6' 'B0DHYGWYJ6',
+        1,
+        'TurboTax Deluxe 2024 Tax Software, Federal & State Tax Return [PC/MAC Download]'
+        '$55.99',
+        '4',
+        434,
+        'https://www.amazon.com/dp/B0DHYGWYJ6',
+        'https://images-na.ssl-images-amazon.com/images/I/71UbHaUeeUL._AC_UL900_SR900,600_.jpg',
+        None,
+        0.7901,
+        'Positive',
+        list(['great', 'Recommend', 'accepts']),
+        'software']
+print(data)

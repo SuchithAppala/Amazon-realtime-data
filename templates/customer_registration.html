@@ -1,0 +1,37 @@
+{% include 'head.html'%}
+<div class="row">
+  <div class="login_container row">
+    <div class="col-6">
+        <img class="w-100 image " src="https://media.istockphoto.com/id/2165462350/photo/woman-shopping-at-a-convenience-store-and-paying-at-the-cashier.jpg?s=612x612&w=0&k=20&c=b0ht75UtQxY0HM2MCNbFO-Xkrz4fP8y1uFNMYsYrfcU=">
+    </div>
+    <div class="col-6 p-30">
+       <form action="customer_registration_action" method="post">
+           <div class="text-center heading h-2">Customer Registration</div>
+
+              <div class="form-group mt-20">
+                <label class="form-label" for="name"> Name</label>
+                <input type="text" name="name" id="name" class="form-control" placeholder="Enter  Name" required>
+              </div>
+              <div class="form-group mt-10">
+                <label class="form-label" for="email">Email</label>
+                <input type="email" name="email" id="email" class="form-control" placeholder="Enter Email" required>
+              </div>
+              <div class="form-group mt-10">
+                <label class="form-label" for="phone">Phone</label>
+                <input type="number" name="phone" id="phone" class="form-control" placeholder="Enter Number" required>
+              </div>
+              <div class="form-group mt-10">
+                <label class="form-label" for="password">Password</label>
+                <input type="password" name="password" class="form-control" id="password" placeholder="Enter Password" required>
+              </div>
+              <div class="form-group mt-10">
+                <label class="form-label" for="address">Address</label>
+                <textarea name="address" id="address" class="form-control" placeholder="Enter Address" required></textarea>
+             </div>
+              <div class="mt-20">
+                <input type="submit" value="Register" class="btn w-100 color-primary p-15 fs-1" >
+              </div>
+            </form>
+          </div>
+        </div>
+  </div>

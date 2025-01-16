@@ -1,0 +1,48 @@
+{% include 'chead.html' %}
+
+<div class="text-center H h1-20">View Notifications</div>
+<div class="mt-10">
+    <div class="row ">
+        {% for notification in notifications %}
+        {% set inventory=get_inventory_id_by_notification(notification[3]) %}
+        {% set product=get_product_id_by_inventory(inventory[3]) %}
+        {% set rating = get_rating_by_product_id(product[0]) %}
+        <div class="w-30 mt-10 ml-10">
+            <div class="card p-10">
+                <div>Status : {{notification[1]}}</div>
+                <div class="row">
+                    <div class="col-6">
+                        <img src="{{product[4]}}" alt="" class="h-img p-10 mb-10">
+                    </div>
+                    <div class="col-6 mt-20">
+                        <div class="row">
+                            <div class="form-label">ASIN</div>
+                            <div class="product-color pl-10">&nbsp;&nbsp;{{product[1]}}</div>
+                        </div>
+                        <div class="row">
+                            <a href="view_product?product_id={{product[0]}}">{{product[2]}}</a>
+                        </div>
+                        <div class="row">
+                            <div class="form-label">Price</div>
+                            <div class="product-color pl-10">&nbsp;-&nbsp;${{product[3]}}</div>
+                        </div>
+                         <div class="row">
+                            <div class="form-label">Category</div>
+                            <div class="product-color pl-10">&nbsp;-&nbsp;{{product[5]}}</div>
+                        </div>
+                        <div class="row">
+                            <div class="form-label">Rating</div>
+                            <div class="product-color pl-10">&nbsp;-&nbsp;{{rating}}</div>
+                        </div>
+                        {% if notification[1] == 'New Notification' %}
+                       <a href="buy?product_id={{product[0]}}" style=background-color:green;color:white;padding:4px;text-decoration:none;border-radius:10px;width:80px;display:inline-block;margin-top:10px;">Buy Now</a>
+                       {% endif %}
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        {% endfor %}
+
+    </div>
+</div>

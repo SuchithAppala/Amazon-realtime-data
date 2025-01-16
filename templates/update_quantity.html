@@ -1,0 +1,20 @@
+{% include 'shead.html' %}
+<div class="mt-100">
+    <div class="card login-card bg-main">
+        <form action="update_quantity_action">
+            <div class="text-center H h1-30">Update Quantity Here</div>
+            <input type="hidden" name="product_id" value="{{product_id}}">
+            <input type="hidden" name="category_name" value="{{category_name}}">
+            <input type="hidden" name="product_title" value="{{product_title}}">
+            <input type="hidden" name="data_type" value="{{data_type}}">
+
+            <div class="mt-10 form-group">
+                <label for="quantity" class="form-label">Quantity</label>
+                <input type="number" name="quantity" id="quantity" placeholder="Enter quantity" class="form-control pe-30">
+            </div>
+            <div class="mt-10">
+                <input type="submit" value="Update Quantity" class="btn w-100 color-primary fs-2">
+            </div>
+        </form>
+    </div>
+</div>

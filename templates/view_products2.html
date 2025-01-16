@@ -1,0 +1,65 @@
+{% if session ['role']=='admin'%}
+{% include 'ahead.html'%}
+{% elif session ['role']=='sellers'%}
+{% include 'shead.html'%}
+{% elif session ['role']=='customers'%}
+{% include 'chead.html'%}
+{% endif %}
+<div class="m-20">
+    <div class="row">
+        {% for product in products %}
+        {% set sentiment_score = get_sentiment_score_by_product_id(product[0]) %}
+        <div class="col-4">
+            <div class="card m-20 p-10">
+                <div class="text-center H h1-20 mb-10"></div>
+                <div class="row">
+                    <div class="col-6">
+                        <img src="{{product[4]}}" alt="" class="h-img p-10 mb-10">
+                    </div>
+                    <div class="col-6 mt-20">
+                        <div class="row">
+                            <div class="form-label">ASIN</div>
+                            <div class="product-color pl-10">&nbsp;&nbsp;{{product[1]}}</div>
+                        </div>
+                        <div class="row">
+                            <a href="view_product?product_id={{product[0]}}">{{product[2]}}</a>
+                        </div>
+                        <div class="row">
+                            <div class="form-label">Price</div>
+                            <div class="product-color pl-10">&nbsp;-&nbsp;${{product[3]}}</div>
+                        </div>
+                         <div class="row">
+                            <div class="form-label">Category</div>
+                            <div class="product-color pl-10">&nbsp;-&nbsp;{{product[5]}}</div>
+                        </div>
+                        <div class="row">
+                            <div class="form-label">Rating</div>
+                            <div class="product-color pl-10">&nbsp;-&nbsp;{{rating}}</div>
+                        </div>
+                        <div class="row">
+                            <div class="form-label">Sentiment score</div>
+                            <div class="product-color pl-10">&nbsp;-&nbsp;{{sentiment_score}}</div>
+                        </div>
+                        {% if session['role']=='sellers' %}
+                           <div class="mt-5"><a href="update_quantity?product_id={{product[0]}}&category_name={{category_name}}&product_title={{product_title}}" style=background-color:green;color:white;padding:4px;text-decoration:none;border-radius:10px;width:80px;">Update Quantity</a></div>
+                          <div class="mt-10"><a href="send_price_request?product_id={{product[0]}}&category_name={{category_name}}&product_title={{product_title}}&price={{product[3]}}" style=background-color:green;color:white;padding:4px;text-decoration:none;border-radius:10px;width:80px;">Price Hike Request</a></div>
+                        {% endif %}
+                        {% if session['role']=='customers'%}
+                            <a href="buy?product_id={{product[0]}}" style=background-color:green;color:white;padding:4px;text-decoration:none;border-radius:10px;width:80px;">Buy Now</a>
+                        {% endif %}
+
+                        {% if session['role']== 'sellers' %}
+                            {% set quantity = get_quantity_by_product_id(product[0]) %}
+                            <div class="product-color pl-10 mt-10">Quantity &nbsp;-&nbsp;{{quantity}}</div>
+                            {% set price, status = get_price_by_product_id(product[0]) %}
+                            {% if price !=0 and status == "Price request" %}
+                            <div class="product-color pl-10 mt-10">Requested Price &nbsp;-&nbsp; $ {{price}}</div>
+                            {% endif %}
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+      {% endfor %}
+    </div>
+</div>

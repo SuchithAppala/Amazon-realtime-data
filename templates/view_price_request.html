@@ -1,0 +1,40 @@
+{% include 'ahead.html'%}
+<div class="m-50">
+    <table border="1" class="w-100">
+        <thead>
+        <tr>
+            <th>Seller Name</th>
+            <th>Product Name</th>
+            <th>Original Price</th>
+            <th>Current Selling Price</th>
+            <th>Predicted Price</th>
+            <th>Request Price</th>
+            <th>Status</th>
+            <th>Action</th>
+        </tr>
+        </thead>
+        <tbody>
+          {% for price_request in price_requests %}
+          {% set seller = get_seller_by_seller_id(price_request[3]) %}
+          {% set product=get_product_by_product_id(price_request[4])%}
+          {% set predicted_price = get_predicted_price_by_product_id(price_request[4]) %}
+          <tr>
+            <td>{{seller[1]}}</td>
+            <td>{{product[2]}}</td>
+            <td>$ {{product[7]}}</td>
+            <td>$ {{product[3]}}</td>
+            <td>$ {{predicted_price}}</td>
+            <td>$ {{price_request[2]}}</td>
+            <td>{{price_request[1]}}</td>
+              {% if price_request[1]=='Price requested' %}
+                 {% if float(price_request[2]) < predicted_price %}
+                <td><a href="approval?price_request_id={{price_request[0]}}&product_id={{product[0]}}&product_price={{price_request[2]}}">Approval</a></td>
+                {% else %}
+                <td><a href="reject?price_request_id={{price_request[0]}}">Reject</a></td>
+                {% endif %}
+              {% endif %}
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>

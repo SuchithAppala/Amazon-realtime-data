@@ -1,0 +1,42 @@
+{% include 'chead.html' %}
+<div class="row mt-20">
+    <div class="col-4"></div>
+    <div class="col-4">
+        <div class="card p-10 login">
+            <form action="order_now_action">
+                <div class="text-center">Total Price ${{total_price}}</div>
+                <input type="hidden" name="order_id" value="{{order_id}}">
+                <input type="hidden" name="total_price" value="{{total_price}}">
+                <input type="hidden" name="is_prescription_needed" value="{{is_prescription_needed}}">
+                <input type="hidden" name="order_type" value="{{order_type}}">
+                <input type="hidden" name="prescription_id" value="{{prescription_id}}">
+                <label for="card_type">Card Type</label>
+                <select name="card_type" id="card_type" class="form-control" required>
+                    <option value="">choose Card Type</option>
+                    <option value="creditcard">Credit Card</option>
+                    <option value="debit_card">Debit Card</option>
+                </select>
+                <div class="mt-10 form-group">
+                    <label class="form-label" for="card_number">Card Number</label>
+                    <input type="number" name="card_number" id="card_number" class="form-control" placeholder="Enter Card Number" required>
+                </div>
+                <div class="mt-10 form-group">
+                    <label class="form-label" for="name_on_card">Name On Card</label>
+                    <input type="text" name="name_on_card" id="name_on_card" class="form-control" placeholder="Enter Name On Card" required>
+                </div>
+                <div class="mt-10 form-group">
+                    <label class="form-label" for="expire_date">Expire Date</label>
+                    <input type="month" name="expire_date" id="expire_date" class="form-control" placeholder="Enter Expire Date" required>
+                </div>
+                <div class="mt-10 form-group">
+                    <label class="form-label" >Cvv</label>
+                    <input type="number" name="cvv" min="100" max="999"   class="form-control" placeholder="Enter Number" required>
+                </div>
+                <div class="mt-10">
+                    <input type="submit" value="Pay And Order" class="btn w-100 color-primary p-10">
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="col-4"></div>
+</div>

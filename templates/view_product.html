@@ -1,0 +1,68 @@
+{% if session ['role']=='admin'%}
+{% include 'ahead.html'%}
+{% elif session ['role']=='sellers'%}
+{% include 'shead.html'%}
+{% elif session ['role']=='customers'%}
+{% include 'chead.html'%}
+{% endif %}
+{% set rating = get_rating_by_product_id(product[0]) %}
+<div class="row">
+    <div class="col-4 ">
+        <div class="card p-10 m-10 ">
+            <div>
+                <img class="h-img mt-50" src="{{product[4]}}" style="height:400px;">
+            </div>
+            <div class="p-5 ">
+                {{product[2]}}
+            </div>
+            <div class="product p-5">
+                ${{product[3]}}
+            </div>
+            <div class="product p-5">
+                Rating - {{rating}}
+            </div>
+        </div>
+    </div>
+    <div class="col-8">
+        {% for rating in ratings%}
+        {% set tag = get_tag_by_rating_id(rating[0])%}
+            <div class="card p-10 m-10 ">
+              <div class="row">
+
+                <div class="col-6">
+                    <div class="product">
+                        {{rating[2]}}
+                    </div>
+                    <div>
+                        <label class="product">Date:</label>
+                        {{rating[4]}}
+                    </div>
+                    <div class="comment">
+                        <label class="product">Comment : </label>
+                        {{rating[1]}}
+                    </div>
+                </div>
+                <div class="col-3">
+                    <div class="row">
+                        <div
+                            style="background-color:green;color:white;padding:4px;text-decoration:none;border-radius:10px;width:80px;">
+                            {{rating[6]}}
+                        </div>
+                    </div>
+                </div>
+                <div class="col-3">
+                    {% if tag[1]!="" %}
+                    <label class="product">tag :</label>
+                    <div>
+                      {{tag[1]}}
+                    </div>
+
+                    {% endif %}
+                </div>
+            </div>
+            </div>
+            {% endfor %}
+
+        </div>
+    </div>
+</div>
